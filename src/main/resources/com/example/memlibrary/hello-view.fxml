@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.memlibrary.HelloController">
+    <left>
+        <VBox fx:id="iconContainer" alignment="CENTER" prefWidth="150" spacing="10">
+            <Button fx:id="iconButton1" onAction="#iconButton1Clicked" text="Штани за 40 гривень">
+                <graphic>
+                    <ImageView fitHeight="30.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                            <Image url="@../../../images/40grn.png"/>
+                        </image>
+                    </ImageView>
+                </graphic>
+            </Button>
+        </VBox>
+    </left>
+    <center>
+        <VBox alignment="CENTER" spacing="10">
+            <Label text="Штани за 40 гривень"/>
+            <ImageView fx:id="mainImageView" fitHeight="400" fitWidth="600" preserveRatio="true">
+                <image>
+                    <Image url="@../../../images/40grn.png"/>
+                </image>
+            </ImageView>
+            <TextArea fx:id="descriptionArea" editable="false" prefHeight="150" prefWidth="600"
+                      text="Штани за 40 гривень — український інтернет-мем, що виник у 2014 році та символізує роздратування від пошкодження чи втрати дешевої, але цінної та надійної речі. Фраза часто використовується для вираження комічної фрустрації щодо дрібних невдач у повсякденному житті, підкреслюючи економічну реальність багатьох українців, де недорогі покупки з секонд-хендів чи ринків набувають особливої ваги."
+                      wrapText="true"/>
+            <Button fx:id="playButton" onAction="#playAudio" text="Програти аудіо ▶"/>
+        </VBox>
+    </center>
+
+</BorderPane>
