@@ -3,8 +3,9 @@ package com.example.memlibrary;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
@@ -16,45 +17,143 @@ import java.util.List;
 public class HelloController {
 
     @FXML
-    Button iconButton1, playButton;
-    @FXML
-    ImageView mainImageView;
-    @FXML
-    TextArea descriptionArea;
-    @FXML
-    VBox iconContainer;
+    private Button playButton;
 
-    MediaPlayer mediaPlayer;
+    @FXML
+    private ImageView mainImageView;
+
+    @FXML
+    private TextArea descriptionArea;
+
+    @FXML
+    private VBox iconContainer;
+
+    private MediaPlayer mediaPlayer;
 
     private final List<MediaItem> items = new ArrayList<>();
 
-    private void createItems() {
-        items.add(new MediaItem("Штани за 40 гривень",
-                "/images/40grn.png",
-                "Штани за 40 гривень — український інтернет-мем, що виник у 2014 році та символізує роздратування від пошкодження чи втрати дешевої, але цінної та надійної речі. Фраза часто використовується для вираження комічної фрустрації щодо дрібних невдач у повсякденному житті, підкреслюючи економічну реальність багатьох українців, де недорогі покупки з секонд-хендів чи ринків набувають особливої ваги",
-                "/audio/40grn.mp3"));
-        items.add(new MediaItem("9 чи 10",
-                "/images/9chi10.png",
-                "Мем «9 чи 10, не чує баба» — це популярний український інтернет-мем, що базується на гумористичному аудіозаписі телефонної розмови між диспетчером поліції та літньою жінкою, яка недочуває.",
-                "/audio/9chi10.mp3"));
+    private MediaItem currentItem;
+
+    @FXML
+    public void initialize() {
+
+        createItems();
+        createIcons();
+
+        if (!items.isEmpty()) {
+            showItem(items.get(0));
+        }
     }
 
+    private void createItems() {
 
 
-    public void iconButton1Clicked(ActionEvent event) {
+        items.add(new MediaItem(
+                "Штани за 40 гривень",
+                "/images/40grn.png",
+                "«Штани за 40 гривень» — популярний український мем про дешеві, але дуже цінні речі, які шкода втратити.",
+                "/audio/40grn.mp3"
+        ));
 
+        items.add(new MediaItem(
+                "9 чи 10",
+                "/images/9chi10.png",
+                "Мем «9 чи 10» став популярним через смішну телефонну розмову та фразу «не чує баба».",
+                "/audio/9chi10.mp3"
+        ));
+
+
+        items.add(new MediaItem(
+                "А я думал сова",
+                "/images/sova.png",
+                "«А я думав сова» — культовий інтернет-мем, що виник із уривка старого відео.",
+                "/audio/sova.mp3"
+        ));
+
+        items.add(new MediaItem(
+                "Вы продоёте рыбов?",
+                "/images/ribov.png",
+                "Мем із котом та фразою «Вы продоёте рыбов?» став дуже популярним у соцмережах.",
+                "/audio/ribov.mp3"
+        ));
+
+
+        items.add(new MediaItem(
+                "Наташ, вставай",
+                "/images/natasha.png",
+                "Мем із котами, які будять Наташу та повідомляють дивні новини.",
+                "/audio/natasha.mp3"
+        ));
+
+
+    }
+
+    private void createIcons() {
+
+        for (MediaItem item : items) {
+
+            ImageView icon = new ImageView(
+                    new Image(getClass().getResourceAsStream(item.getImagePath()))
+            );
+
+            icon.setFitWidth(90);
+            icon.setFitHeight(60);
+            icon.setPreserveRatio(true);
+
+            Button button = new Button(item.getTitle());
+
+            button.setGraphic(icon);
+
+            button.setContentDisplay(ContentDisplay.TOP);
+
+            button.setPrefWidth(130);
+            button.setPrefHeight(100);
+
+            button.setStyle("""
+                    -fx-font-size: 11px;
+                    -fx-background-radius: 10;
+                    -fx-padding: 5;
+                    """);
+
+            button.setOnAction(event -> showItem(item));
+
+            iconContainer.getChildren().add(button);
+        }
+    }
+
+    private void showItem(MediaItem item) {
+
+        currentItem = item;
+
+        Image image = new Image(
+                getClass().getResourceAsStream(item.getImagePath())
+        );
+
+        mainImageView.setImage(image);
+
+        descriptionArea.setText(item.getDescription());
     }
 
     public void playAudio(ActionEvent event) {
 
         try {
 
+            if (currentItem == null) {
+                return;
+            }
+
             if (mediaPlayer != null) {
                 mediaPlayer.stop();
             }
-            String audio = getClass().getResource("/audio/40grn.mp3").toExternalForm();
-            Media media = new Media(audio);
+
+            String audioPath = getClass()
+                    .getResource(currentItem.getAudioPath())
+                    .toExternalForm();
+
+            Media media = new Media(audioPath);
+
             mediaPlayer = new MediaPlayer(media);
+
             mediaPlayer.play();
 
         } catch (Exception e) {
