@@ -109,7 +109,7 @@ public class HelloController {
         ));
 
         items.add(new MediaItem(
-                "Вітдай сало!!",
+                "Віддай сало!!",
                 "/images/otdaySalo.png",
                 "Культова та емоційна вимога повернути найцінніше🤣",
                 null,
