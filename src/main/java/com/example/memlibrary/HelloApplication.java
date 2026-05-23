@@ -5,20 +5,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class HelloApplication extends Application {
+
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 780);
+    public void start(Stage stage) throws Exception {
+
+        FXMLLoader loader = new FXMLLoader(
+                HelloApplication.class.getResource("hello-view.fxml")
+        );
+
+        Scene scene = new Scene(loader.load(), 1000, 780);
+
         stage.setTitle("Бібліотека мемів");
         stage.setScene(scene);
         stage.show();
     }
-    public class Launcher {
-        public static void main(String[] args) {
-            Application.launch(HelloApplication.class, args);
-        }
+
+    public static void main(String[] args) {
+        launch();
     }
 }

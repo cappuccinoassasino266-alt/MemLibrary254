@@ -2,90 +2,221 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.MediaView?>
 
 <BorderPane xmlns="http://javafx.com/javafx/17.0.12"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.memlibrary.HelloController"
-            stylesheets="@style.css">
+            stylesheets="@style.css"
+            styleClass="root">
 
     <top>
-        <HBox alignment="CENTER_LEFT" prefHeight="70" styleClass="top-bar">
+        <HBox alignment="CENTER_LEFT"
+              prefHeight="76"
+              styleClass="top-bar">
+
             <padding>
-                <Insets top="10" right="28" bottom="10" left="28"/>
+                <Insets top="12" right="28" bottom="12" left="28"/>
             </padding>
 
-            <Label text="🎵 Бібліотека мемів!" styleClass="top-title"/>
+            <VBox spacing="2">
+
+                <Label text="🎵 Бібліотека мемів!"
+                       styleClass="top-title"/>
+
+                <Label text="Ultimate Edition"
+                       styleClass="mini-label"/>
+
+            </VBox>
+
             <Region HBox.hgrow="ALWAYS"/>
-            <Label text="Dark style by Arseniy" styleClass="top-subtitle"/>
+
+            <HBox spacing="10">
+
+                <Button text="Dark"
+                        onAction="#setDarkTheme"
+                        styleClass="theme-button"/>
+
+                <Button text="White"
+                        onAction="#setWhiteTheme"
+                        styleClass="theme-button-white"/>
+
+                <Button text="Gradient"
+                        onAction="#setGradientTheme"
+                        styleClass="theme-button-gradient"/>
+
+                <Button text="Glass"
+                        onAction="#setGlassTheme"
+                        styleClass="theme-button-glass"/>
+
+            </HBox>
+
+            <Region minWidth="25"/>
+
+            <Label text="Dark style by Arseniy and Kostia"
+                   styleClass="top-subtitle"/>
+
         </HBox>
     </top>
 
     <left>
-        <VBox spacing="20" prefWidth="250" styleClass="sidebar">
+
+        <VBox spacing="20"
+              prefWidth="265"
+              styleClass="sidebar">
+
             <padding>
                 <Insets top="26" right="0" bottom="26" left="0"/>
             </padding>
 
-            <VBox spacing="4">
+            <VBox spacing="5">
+
                 <padding>
                     <Insets left="24" right="24"/>
                 </padding>
-                <Label text="Меми" styleClass="sidebar-title"/>
-                <Label text="Обери мем зі списку" styleClass="sidebar-subtitle"/>
+
+                <Label text="Меми"
+                       styleClass="sidebar-title"/>
+
+                <Label text="Обери мем зі списку"
+                       styleClass="sidebar-subtitle"/>
+
             </VBox>
 
-            <ScrollPane fitToWidth="true" hbarPolicy="NEVER" styleClass="scroll-pane">
+            <ScrollPane fitToWidth="true"
+                        hbarPolicy="NEVER"
+                        styleClass="scroll-pane">
+
                 <content>
-                    <VBox fx:id="iconContainer" alignment="TOP_CENTER" spacing="22">
+
+                    <VBox fx:id="iconContainer"
+                          alignment="TOP_CENTER"
+                          spacing="22">
+
                         <padding>
                             <Insets top="15" right="28" bottom="25" left="28"/>
                         </padding>
+
                     </VBox>
+
                 </content>
+
             </ScrollPane>
+
         </VBox>
+
     </left>
 
     <center>
-        <VBox alignment="TOP_CENTER" spacing="24" styleClass="main-content">
+
+        <VBox alignment="TOP_CENTER"
+              spacing="24">
+
             <padding>
                 <Insets top="26" right="26" bottom="26" left="26"/>
             </padding>
 
-            <StackPane styleClass="content-card">
+            <VBox alignment="CENTER"
+                  spacing="14"
+                  styleClass="content-card">
+
                 <padding>
                     <Insets top="20" right="20" bottom="20" left="20"/>
                 </padding>
 
-                <VBox alignment="CENTER" styleClass="image-wrapper">
-                    <StackPane>
-                        <ImageView fx:id="mainImageView"
-                                   fitHeight="410"
-                                   fitWidth="650"
-                                   preserveRatio="true"/>
-                        <MediaView fx:id="mainMediaView"
-                                   fitHeight="410"
-                                   fitWidth="650"
-                                   preserveRatio="true"/>
-                    </StackPane>
+                <HBox alignment="CENTER_LEFT"
+                      spacing="10"
+                      styleClass="card-topbar">
+
+                    <Pane styleClass="window-dot-red"/>
+                    <Pane styleClass="window-dot-yellow"/>
+                    <Pane styleClass="window-dot-green"/>
+
+                    <Region HBox.hgrow="ALWAYS"/>
+
+                    <Label text="MEM PLAYER"
+                           styleClass="card-mini-title"/>
+
+                </HBox>
+
+                <StackPane>
+
+                    <ImageView fx:id="mainImageView"
+                               fitHeight="410"
+                               fitWidth="650"
+                               preserveRatio="true"/>
+
+                    <MediaView fx:id="mainMediaView"
+                               fitHeight="410"
+                               fitWidth="650"
+                               preserveRatio="true"/>
+
+                </StackPane>
+
+            </VBox>
+
+            <HBox spacing="16">
+
+                <VBox spacing="10">
+
+                    <Label text="Опис"
+                           styleClass="section-title"/>
+
+                    <TextArea fx:id="descriptionArea"
+                              editable="false"
+                              wrapText="true"
+                              prefHeight="130"
+                              prefWidth="650"
+                              styleClass="text-area"/>
+
                 </VBox>
-            </StackPane>
 
-            <TextArea fx:id="descriptionArea"
-                      editable="false"
-                      wrapText="true"
-                      prefHeight="130"
-                      prefWidth="650"
-                      styleClass="text-area"/>
+                <VBox spacing="12">
 
-            <Button fx:id="playButton"
-                    onAction="#playAudio"
-                    text="▶ Програти аудіо"
-                    styleClass="action-button"/>
+                    <Label text="Статус"
+                           styleClass="section-title"/>
+
+                    <VBox spacing="10"
+                          prefWidth="160"
+                          styleClass="info-card">
+
+                        <Label text="● Online"
+                               styleClass="info-green"/>
+
+                        <Label text="JavaFX 21"
+                               styleClass="info-text"/>
+
+                        <Label text="Vista UI"
+                               styleClass="info-text"/>
+
+                        <Label text="Animations"
+                               styleClass="info-text"/>
+
+                    </VBox>
+
+                </VBox>
+
+            </HBox>
+
+            <HBox spacing="16">
+
+                <Button fx:id="playButton"
+                        onAction="#playAudio"
+                        text="▶ Програти аудіо"
+                        styleClass="action-button"/>
+
+                <Button text="★ Favorite"
+                        styleClass="secondary-button"/>
+
+                <Button text="⬇ Save"
+                        styleClass="secondary-button"/>
+
+            </HBox>
+
         </VBox>
+
     </center>
 
 </BorderPane>
