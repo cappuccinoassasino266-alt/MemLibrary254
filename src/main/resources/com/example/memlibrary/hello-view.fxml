@@ -33,7 +33,7 @@
                     <Insets top="10" right="18" bottom="10" left="18"/>
                 </padding>
 
-                <Label text="🎵 Бібліотека мемів"
+                <Label text="🎵 Бібліотека мемів!"
                        style="
                             -fx-font-size: 25px;
                             -fx-font-weight: bold;
